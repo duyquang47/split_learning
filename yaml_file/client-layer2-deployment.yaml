@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-layer2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-layer2-pod
+  template:
+    metadata:
+      labels:
+        app: client-layer2-pod
+    spec:
+      containers:
+      - name: client-layer2
+        image: quang47/client
+        command: ["/bin/sh", "-c", "sleep 20 && python client.py --layer_id 2 --device cpu"]
+        volumeMounts:
+        - name: client-config
+          mountPath: /app/config.yaml
+          subPath: config.yaml
+      volumes:
+      - name: client-config
+        configMap: 
+          name: split-learning-config

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-pod
+  template:
+    metadata:
+      labels:
+        app: server-pod
+    spec:
+      containers:
+      - name: server
+        image: quang47/server
+        ports:
+        - containerPort: 5672
+        volumeMounts:
+        - name: server-config
+          mountPath: /app/config.yaml
+          subPath: config.yaml
+        command: ["/bin/sh", "-c", "sleep 10 && python server.py"]
+      volumes:
+      - name: server-config
+        configMap: 
+          name: split-learning-config
+

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+data:
+  config.yaml: |
+    rabbit:
+      address: rabbitmq-service.default.svc.cluster.local
+      username: admin
+      password: admin
+  rabbitmq.conf: |
+    default_user = admin
+    default_pass = admin
+    max_message_size = 524288000
+  limits.conf: |
+    rabbitmq soft nofile 65536
+    rabbitmq hard nofile 65536

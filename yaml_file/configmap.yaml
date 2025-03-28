@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: split-learning-config
+data:
+  config.yaml: |
+    name: Split Learning
+    server:
+      num-round: 1
+      local-round: 1
+      global-round: 2
+      cut_layers:
+        - 24
+      clients:
+        - 1
+        - 1
+        - 1
+      model: VGG16
+      parameters:
+        load: True
+        save: True
+      validation: True
+      data-mode: even
+      data-distribution:
+        num-data-range:
+          - 0
+          - 500
+        non-iid-rate: 0.5
+        refresh-each-round: True
+      random-seed: 1
+      client-cluster:
+        enable: False
+        syn-cut-layers: False
+        special: False
+        cluster: AffinityPropagation
+        AffinityPropagation:
+          damping: 0.9
+          max_iter: 1000
+
+    rabbit:
+      address: rabbitmq-service
+      username: admin
+      password: admin
+
+    log_path: .
+    debug_mode: True
+
+    learning:
+      learning-rate: 0.01
+      momentum: 0.5
+      batch-size: 128
+      control-count: 3
