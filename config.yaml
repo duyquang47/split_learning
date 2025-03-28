@@ -15,9 +15,9 @@ server:
   validation: False
 
 rabbit:
-  address: 192.168.101.234
-  username: dai
-  password: dai
+  address: rabbitmq
+  username: admin
+  password: admin
 
 log_path: .
 
