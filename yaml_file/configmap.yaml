@@ -10,7 +10,8 @@ data:
       local-round: 1
       global-round: 2
       cut_layers:
-        - 24
+        - 10
+        - 20
       clients:
         - 1
         - 1
