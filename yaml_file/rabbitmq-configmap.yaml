@@ -5,7 +5,7 @@ metadata:
 data:
   config.yaml: |
     rabbit:
-      address: rabbitmq-service.default.svc.cluster.local
+      address: rabbitmq-service
       username: admin
       password: admin
   rabbitmq.conf: |
